@@ -35,7 +35,7 @@ De ésta forma, los ficheros procesados y almacenados en el directorio /opt dent
 
 Obviamente ésta es una configuration muy simple con un único host, y no es recomendable para escenarios mulit-hosts, dado que el Pod utilizará la ruta /data de todos los hosts esperando encontrar los mismos ficheros en todos los hosts y tendríamos que recurrir a algún tipo de replicación externa. 
 
-Kubernetes soporta muchos tipos de storage solutions externos como por ejemplo: NFS, GlusterFS, Flocker, Ceph, Scaleio, y soluciones cloud como AWS, GCP, Azure y OCI.
+Kubernetes soporta muchos tipos de storage solutions externos como por ejemplo: **NFS, GlusterFS, Flocker, Ceph, Scaleio, y soluciones cloud como AWS, GCP, Azure y OCI.**
 
 Ejemplo con AWS EBS:
 
