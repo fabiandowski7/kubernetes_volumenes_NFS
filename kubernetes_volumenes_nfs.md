@@ -17,7 +17,7 @@ root@ub-nfs-sbd:~# cat /etc/exports
 /home/nfs               *(rw,no_root_squash)
 
 root@ub-nfs-sbd:~# mkdir /home/nfs
-root@ub-nfs-sbd:~# echo "NFS Kubernetes" > /home/nfs/oscarmas
+root@ub-nfs-sbd:~# echo "NFS Kubernetes" > /home/nfs/prueba.out
 root@ub-nfs-sbd:~# systemctl restart nfs-kernel-server
 ```
 
@@ -114,7 +114,7 @@ Seguidamente nos conectaremos a uno de los pods, para verificar que se ha montad
 rootdevel@ub-nodo0-sbd:~$ kubectl get pods -o wide
 rootdevel@ub-nodo0-sbd:~$ kubectl exec -it nfs-web-fscpl -- /bin/bash
 root@nfs-web-fscpl:/# df -h
-root@nfs-web-fscpl:/# cat /usr/share/nginx/html/oscarmas
+root@nfs-web-fscpl:/# cat /usr/share/nginx/html/prueba.out
 root@nfs-web-fscpl:/# exit
 ```
 ![kubernetes-018-694x417](https://user-images.githubusercontent.com/18565089/129231507-8c1c9218-23db-4f6e-81c5-558e7700fee9.png)
