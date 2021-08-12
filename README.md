@@ -1,6 +1,4 @@
-# kubernetes_volumenes_NFS
-Como montar una partición NFS dentro de un pod.
-
+# Persistent Volumes en Kubernetes
 
 En este artículo hablé de forma muy resumida sobre los volúmenes persitentes en Docker. En esta ocasión vamos a ver cómo gestionar dichos volúmenes en Kubernetes.
 Los contenedores en Docker son transitorios por naturaleza y son destruidos una vez completan su función. El mismo principio se aplica a los datos del contenedor, los cuales son eliminados junto con el contenedor.  
