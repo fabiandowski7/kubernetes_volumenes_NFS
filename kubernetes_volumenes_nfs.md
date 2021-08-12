@@ -1,8 +1,6 @@
 # Kubernetes: Volúmenes NFS
 
-Soy Oscar Mas y cuando eliminamos un pod (contenedor), toda la información que hay en él desaparece. Para poder conseguir que los datos que se han ido almacenando en nuestro pod persistan (no se eliminen al borrar el pod), es necesario usar los volúmenes de docker (Data Volume)
-
-Hoy os quiero enseñar como montar una particion NFS dentro de un pod.
+Cuando eliminamos un pod (contenedor), toda la información que hay en él desaparece. Para poder conseguir que los datos que se han ido almacenando en nuestro pod persistan (no se eliminen al borrar el pod), es necesario usar los volúmenes de docker (Data Volume)
 
 Para ello montaremos un servidor NFS (ub-nfs-sbd) y posteriormente desplegaremos los volúmenes, para poder acceder al servicio de NFS desde nuestros pods
 
@@ -14,8 +12,10 @@ El primer paso que haremos es instalar el sistema de NFS en el servidor ub-nfs-s
 
 ```
 root@ub-nfs-sbd:~# apt-get install -y nfs-common nfs-kernel-server
+
 root@ub-nfs-sbd:~# cat /etc/exports
 /home/nfs               *(rw,no_root_squash)
+
 root@ub-nfs-sbd:~# mkdir /home/nfs
 root@ub-nfs-sbd:~# echo "NFS Kubernetes" > /home/nfs/oscarmas
 root@ub-nfs-sbd:~# systemctl restart nfs-kernel-server
@@ -35,12 +35,32 @@ Verificaremos la conectividad con nuestro servidor de NFS desde cualquiera de lo
 Una vez verificado, crearemos un yaml de pv y pvc, desde nuestro servidor de Kubernetes y verificaremos su correcto funcionamiento:
 
 ```
-root@ub-nfs-sbd:~# apt-get install -y nfs-common nfs-kernel-server
-root@ub-nfs-sbd:~# cat /etc/exports
-/home/nfs               *(rw,no_root_squash)
-root@ub-nfs-sbd:~# mkdir /home/nfs
-root@ub-nfs-sbd:~# echo "NFS Kubernetes" > /home/nfs/oscarmas
-root@ub-nfs-sbd:~# systemctl restart nfs-kernel-server
+rootdevel@ub-nodo0-sbd:~$ cat nfs-pv-pvc.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: kube-nfs-pv
+spec:
+  storageClassName: storage-nfs
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.0.215
+    path: "/home/nfs"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: kube-nfs-pvc
+spec:
+  storageClassName: storage-nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
 ```
 Crearemos el PV y el PVC de la siguiente manera, posteriormente verificaremos que se han creado:
 
