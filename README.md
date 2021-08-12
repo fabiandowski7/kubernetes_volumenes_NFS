@@ -134,3 +134,5 @@ persistentVolumeReclaimPolicy: Delete (el PV será eliminado automáticamente). 
 ```
 
 Los ejemplos que hemos visto son para configuraciones Static Provisioning, que requieren de la creación de PV cada vez. Para una asignación dinámica se utiliza Dyamic Provisioning, haciendo uso de Storage Classes, de los que hablaré en otro post.
+
+* [Kubernetes: Volúmenes NFS](kubernetes_volumenes_nfs.md)
