@@ -106,7 +106,7 @@ K8s asigna un PV a un PVC en función de los siguientes factores:
 - Modos del volumen
 - Storage Class.
 - Labels y Selectors (con el fin de asignar el PV que se quiera).
-- 
+
 En el caso de que no haya una opción mejor, K8s puede asignar PV de mayor capacidad al PVC, siendo en éste caso poco eficiente.
 
 En el caso de que K8s no encuentre un PV que pueda asignar al PVC, el PVC quedará en estado “Pending”, esperando que haya un nuevo PV disponible.
@@ -133,6 +133,7 @@ persistentVolumeReclaimPolicy: Delete (el PV será eliminado automáticamente). 
 
 ```
 
-Los ejemplos que hemos visto son para configuraciones Static Provisioning, que requieren de la creación de PV cada vez. Para una asignación dinámica se utiliza Dyamic Provisioning, haciendo uso de Storage Classes, de los que hablaré en otro post.
+Los ejemplos que hemos visto son para configuraciones Static Provisioning, que requieren de la creación de PV cada vez. Para una asignación dinámica se utiliza Dyamic Provisioning, haciendo uso de Storage Classes.
+
 
 * [Kubernetes: Volúmenes NFS](kubernetes_volumenes_nfs.md)
